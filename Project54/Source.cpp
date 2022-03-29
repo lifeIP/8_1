@@ -38,8 +38,7 @@ void process(const char* fileName_1, const char* fileName_2) {
 		{
 			char buff2[250] = {};
 			findANDreplace(buff, buff2, 'Я', 'я');
-			cout << buff << endl;
-			cout << buff2 << endl;
+			cout << buff2;
 			fo << buff2;
 		}
 	}
@@ -49,6 +48,7 @@ void process(const char* fileName_1, const char* fileName_2) {
 void findANDreplace(char* str_l, char* resault_l, const char f, const char s) {
 	char ss[] = { "Ты" };
 	char ss2[] = { "ты" };
+	int counter = 0;
 	memset(resault_l, 0, sizeof(char) * 250);
 	strcat(resault_l, str_l);
 	for (int i = 0; i < strlen(resault_l); i++) {
@@ -61,6 +61,7 @@ void findANDreplace(char* str_l, char* resault_l, const char f, const char s) {
 			strcat(s1, s2);
 			memset(resault_l, 0, sizeof(char) * 250);
 			strcat(resault_l, s1);
+			counter += 1;
 			i = 0;
 		}
 		else if (resault_l[i] == 'я') {
@@ -72,6 +73,7 @@ void findANDreplace(char* str_l, char* resault_l, const char f, const char s) {
 			strcat(s1, s2);
 			memset(resault_l, 0, sizeof(char) * 250);
 			strcat(resault_l, s1);
+			counter += 1;
 			i = 0;
 		}
 	}
