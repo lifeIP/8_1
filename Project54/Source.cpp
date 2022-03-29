@@ -16,11 +16,35 @@ int main() {
 }
 
 void process(const char* fileName_1, const char* fileName_2) {
-	char first[250] = {};
-	char second[250] = {};
-	strcpy(first, "Олег нуб, я а Я молодец");
-	findANDreplace(first, second, 'Я', 'я');
-	cout << second;
+	FILE* f = fopen(fileName_1, "rt");
+	if (f == NULL)
+	{
+		cout << "Не удалось открыть файл " << fileName_1 << endl;
+		return;
+	}
+	ofstream fo;
+	fo.open(fileName_2);
+	if (!fo.is_open())
+	{
+		cout << "Не удалось открыть файл " << fileName_2 << endl;
+		fclose(f);
+		return;
+	}
+	while (!feof(f))
+	{
+		char buff[250] = {};
+		fgets(buff, 199, f);
+		if (strlen(buff) > 0)
+		{
+			char buff2[250] = {};
+			findANDreplace(buff, buff2, 'Я', 'я');
+			cout << buff << endl;
+			cout << buff2 << endl;
+			fo << buff2;
+		}
+	}
+	fclose(f);
+	fo.close();
 }
 void findANDreplace(char* str_l, char* resault_l, const char f, const char s) {
 	char ss[] = { "Ты" };
